@@ -1,0 +1,20 @@
+<html>
+
+    <head>
+        <title> Base </title>
+    </head>
+
+    <body>
+
+        <h2>Base</h2>
+        <a href="{% url 'home' %}">Inicio</a>
+        <a href="{% url 'user-read' %}">Listar Usuário</a>
+        <a href="{% url 'user-create' %}">Cadastrar Usuário</a>
+        
+
+
+        {% block content %}
+
+        {% endblock %}
+    </body>
+</html>

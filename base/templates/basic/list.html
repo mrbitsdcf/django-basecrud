@@ -1,0 +1,15 @@
+{% extends "home.html" %}
+
+{% block content %}
+    <h2>{{ title_page }}</h2>
+    
+    {% for label, field in fields.iteritems %}
+        {% for lab, fil in field.iteritems %}
+            {{ lab }}:  {{ fil }}<br/>
+        {% endfor %}
+        <a href="{% url "client-detail" label %}" >Detalhes</a>
+        <a href="{% url "remove-client" label %}" >Remover</a>
+        <br/><br/>
+    {% endfor %}
+{% endblock %}
+

@@ -1,0 +1,21 @@
+<h2>{{ title_page }}</h2>
+
+<form action="{{request.path_info }}" method="POST">
+
+{% if redirect %}<input type="hidden" value="{{ redirect }}" name="redirect" />{% endif %}
+
+{% csrf_token %}
+
+{% for field in form %}
+    <dt style='color:red; font-weight: bold;'>{{ field.errors }}</dt>
+   <dt><label>{{ field.label_tag }}: </label></dt>
+
+   <dd>
+       {{ field }}
+       <small>{{ field.help_text }}</small>
+   </dd>
+{% endfor %}
+
+<input type="submit" value="Send"/>
+<input type="reset" value="Clear"/>
+</form>
