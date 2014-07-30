@@ -20,9 +20,14 @@
                     {% endif %}
                 {% endfor %}
                 {% if options != None %}
-                    {% for key, value in options.iteritems %}
-                        <td>{{ value }}</td>
+                    {% for k, option in options.iteritems %}
+                        {% if k == row.id %}
+                            {% for op in option %}
+                                {% autoescape off %}<td>{{ op }}</td>{% endautoescape %}
+                            {% endfor %}
+                        {% endif %}
                     {% endfor %}
+
                 {% endif %}
             </tr>
         {% endfor %}

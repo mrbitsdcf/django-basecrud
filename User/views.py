@@ -22,7 +22,8 @@ def userCreate(request):
 def userUpdate(request, id):
     dic.update({
         'title_page': 'Edit a User',
-        'id' : id
+        'id' : id,
+        'redirect': 'user-view'
     })
 
     formName = 'userForm'
@@ -52,7 +53,7 @@ def userRead(request):
     data = None
 
     options = {
-        'editar' : {'link': 'user-update', 'label': 'Editar', 'args': ['id']},
+        'editar' : {'href': 'user-update', 'class': 'btn btn-info', 'label': 'Editar', 'args': ['id']},
         #{'link': 'user-update', 'label': 'Editar', 'args': {'id'}},
     }
 

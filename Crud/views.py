@@ -65,12 +65,22 @@ def read(request, module, modelName, fields, dic, template, options = None, data
     else:
         rows = data
 
-    #@TODO: processar os options antes de mandar pro dic
+    options_html = {}
+
+    for row in rows:
+        for key, option in options.iteritems():
+            options_html[row.id] = []
+
+            arg_list = []
+            for arg in option['args']:
+                arg_list.append(getattr(row, arg))
+            argscv = tuple(arg_list)
+            options_html[row.id].append('<a href="' + reverse(option['href'], args=argscv) + '" class="' + option['class'] + '">' + option['label'] + '</a> ')
 
     dic.update({
         'rows' : rows,
         'fields': fields,
-        'options': options
+        'options': options_html
     })
 
     return render_to_response(template, dic, context_instance=RequestContext(request))
