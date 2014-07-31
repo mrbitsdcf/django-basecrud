@@ -8,7 +8,7 @@ urlpatterns = patterns('',
     url(r'^cadastrar/usuario/$', 'User.views.userCreate', name='user-create'),
     url(r'^alterar/usuario/(\d+)$', 'User.views.userUpdate', name='user-update'),
     url(r'^listar/usuario/$', 'User.views.userRead', name='user-read'),
-    url(r'^visualizar/usuario/(\w+<id>)$', 'User.views.userView', name='user-view'),
+    url(r'^visualizar/usuario/(\d+)$', 'User.views.userView', name='user-view'),
 
     # Examples:
     # url(r'^$', 'base.views.home', name='home'),

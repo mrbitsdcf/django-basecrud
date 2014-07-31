@@ -1,9 +1,7 @@
 <h2>{{ title_page }}</h2>
 
-{% for row in rows.values %}
-    {% for key, value in row.iteritems %}
-        {% if key in fields %}
-            {{ key }}: {{ value }}<br/>
-        {% endif %}
-    {% endfor %}
+{% for key, value in row.iteritems %}
+    {% if key in fields %}
+        <b>{{ key }}</b>: {{ value }}<br/>
+    {% endif %}
 {% endfor %}

@@ -68,9 +68,8 @@ def read(request, module, modelName, fields, dic, template, options = None, data
     options_html = {}
 
     for row in rows:
+        options_html[row.id] = []
         for key, option in options.iteritems():
-            options_html[row.id] = []
-
             arg_list = []
             for arg in option['args']:
                 arg_list.append(getattr(row, arg))
@@ -80,6 +79,30 @@ def read(request, module, modelName, fields, dic, template, options = None, data
     dic.update({
         'rows' : rows,
         'fields': fields,
+        'options': options_html
+    })
+
+    return render_to_response(template, dic, context_instance=RequestContext(request))
+
+def detail(request, module, modelName, fields, dic, template, options = None, data = None):
+    model = getattr(__import__(module, fromlist=['models']), modelName)
+
+    if data is None:
+        row = model.objects.get(pk=dic['id'])
+    else:
+        row = data
+
+    options_html = []
+    for key, option in options.iteritems():
+        arg_list = []
+        for arg in option['args']:
+            arg_list.append(getattr(row, arg))
+        argscv = tuple(arg_list)
+        options_html.append('<a href="' + reverse(option['href'], args=argscv) + '" class="' + option['class'] + '">' + option['label'] + '</a> ')
+
+    dic.update({
+        'row' : row.__dict__,
+        'fields' : fields,
         'options': options_html
     })
 

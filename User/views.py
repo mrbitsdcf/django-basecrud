@@ -53,28 +53,29 @@ def userRead(request):
     data = None
 
     options = {
-        'editar' : {'href': 'user-update', 'class': 'btn btn-info', 'label': 'Editar', 'args': ['id']},
+        'visualizar' : {'href': 'user-view', 'class': 'btn btn-info', 'label': 'Visualizar', 'args': ['id']},
+        'editar' : {'href': 'user-update', 'class': 'btn btn-info', 'label': 'Editar', 'args': ['id']}, 
         #{'link': 'user-update', 'label': 'Editar', 'args': {'id'}},
     }
 
     return baseView.read(request, module, modelName, fields, dic, template, options, data)
 
-def userView(request):
+def userView(request, id):
     dic.update({
-        'title_page': 'View users',
+        'title_page': 'View user',
+        'id':id
     })
 
     module = 'django.contrib.auth.models'
     modelName = 'User'
-    template = 'basic/read.html'
+    template = 'basic/detail.html'
 
-    fields = ['username', 'password']
+    fields = ['username', 'first_name', 'last_name', 'email']
 
     data = None
 
     options = {
-        'editar' : {'link': 'user-update', 'label': 'Editar'},
-        #{'link': 'user-update', 'label': 'Editar', 'args': {'id'}},
+        'editar' : {'href': 'user-update', 'class': 'btn btn-info', 'label': 'Editar', 'args': ['id']},
     }
 
-    return baseView.read(request, module, modelName, fields, dic, template, options, data)
+    return baseView.detail(request, module, modelName, fields, dic, template, options, data)
