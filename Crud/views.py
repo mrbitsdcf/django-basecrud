@@ -23,7 +23,7 @@ def create(request, formName, module, dic, template='basic/create.html', formDat
     forms = getattr(__import__(module, fromlist=['forms']), 'forms')
     methodtoCall = getattr(forms, formName)
     if request.POST:
-        form = methodtoCall(request.POST)
+        form = methodtoCall(request.POST, instance=formData)
 
         if form.is_valid():
             inserted = form.save()
